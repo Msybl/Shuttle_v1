@@ -1,11 +1,17 @@
 package com.example.mehmet.shuttle_v1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import com.google.android.gms.maps.GoogleMap;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +39,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    /* send button func */
+    public void go2maps(View view){
+
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+
     }
 }

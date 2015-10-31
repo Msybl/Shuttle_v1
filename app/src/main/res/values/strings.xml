@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Shuttle_v1</string>
+    <string name="app_name">ShuttleV1</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="go_to_maps">Map</string>
 </resources>
