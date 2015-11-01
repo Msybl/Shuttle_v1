@@ -1,6 +1,7 @@
 package com.example.mehmet.shuttle_v1;
 
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -71,7 +73,7 @@ public class MapsActivity extends FragmentActivity {
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(ISTANBUL).title("Shuttle app is coming ;)")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                .snippet("Population: 4,137,400")
+                .snippet("Populasyon: 15m :O")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
                 .alpha(0.7f));
 
@@ -85,5 +87,12 @@ public class MapsActivity extends FragmentActivity {
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.setMyLocationEnabled(true);
 
+        PolylineOptions polOpt = new PolylineOptions()
+                .width(15)
+                .color(Color.MAGENTA)
+                .add(ISTANBUL)
+                .add(new LatLng(42.022598, 30.025870));
+
+        mMap.addPolyline(polOpt);
     }
 }
