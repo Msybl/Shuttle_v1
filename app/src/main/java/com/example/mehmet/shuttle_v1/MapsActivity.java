@@ -1,5 +1,6 @@
 package com.example.mehmet.shuttle_v1;
 
+import android.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -8,6 +9,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -16,6 +19,7 @@ public class MapsActivity extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     static final LatLng ISTANBUL = new LatLng(41.022598, 29.025870);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +69,21 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(ISTANBUL).title("Shuttle app is coming ;)"));
+        mMap.addMarker(new MarkerOptions().position(ISTANBUL).title("Shuttle app is coming ;)")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                .snippet("Population: 4,137,400")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                .alpha(0.7f));
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+//        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ISTANBUL, 11));
+
+//        mMap.setPadding(0, 0, 300, 0);
+
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.setMyLocationEnabled(true);
 
     }
 }
