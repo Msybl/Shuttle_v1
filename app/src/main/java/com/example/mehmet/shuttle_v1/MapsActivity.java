@@ -13,12 +13,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 
-public class MapsActivity extends FragmentActivity {
+import java.util.ArrayList;
+
+public class MapsActivity extends FragmentActivity implements
+        OnMapClickListener, OnMapLongClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private ArrayList<LatLng> arrayPoints = new ArrayList<LatLng>();
+    PolylineOptions polylineOptions;
 
     static final LatLng ISTANBUL = new LatLng(41.022598, 29.025870);
 
@@ -87,12 +95,43 @@ public class MapsActivity extends FragmentActivity {
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.setMyLocationEnabled(true);
 
-        PolylineOptions polOpt = new PolylineOptions()
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
+
+/*        PolylineOptions polOpt = new PolylineOptions()
                 .width(15)
                 .color(Color.MAGENTA)
                 .add(ISTANBUL)
                 .add(new LatLng(42.022598, 30.025870));
 
-        mMap.addPolyline(polOpt);
+        mMap.addPolyline(polOpt);*/
+
+
     }
+
+    @Override
+    public void onMapClick(LatLng point) {
+        //add marker
+        mMap.clear();
+        MarkerOptions markerOpt =new MarkerOptions();
+        markerOpt.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        markerOpt.position(point);
+        mMap.addMarker(markerOpt);
+
+        // setting polyline in the map
+        polylineOptions = new PolylineOptions();
+        polylineOptions.color(Color.CYAN);
+        polylineOptions.width(15);
+        polylineOptions.geodesic(true);
+        arrayPoints.add(point);
+        polylineOptions.addAll(arrayPoints);
+        mMap.addPolyline(polylineOptions);
+    }
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+        mMap.clear();
+        arrayPoints.clear();
+    }
+
 }
